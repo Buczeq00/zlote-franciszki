@@ -1,1 +1,259 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Złote Franciszki</title>
+  <!-- Ładowanie bibliotek bezpośrednio z sieci, żeby Vercel nie wywalał błędu -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body style="margin: 0; padding: 0;">
 
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const CATEGORIES = [
+      {
+        id: 1,
+        name: "🎮 Gamer Moment / Clutch roku",
+        clips: [
+          { id: "g1", title: "Harry Pioter 1v5 na bicie", ytId: "dQw4w9WgXcQ" },
+          { id: "g2", title: "Walter (Mr_łosoś) ace w rundzie eco", ytId: "dQw4w9WgXcQ" },
+          { id: "g3", title: "Fuks życia na midzie", ytId: "dQw4w9WgXcQ" },
+          { id: "g4", title: "Niezwykły skok z dachu", ytId: "dQw4w9WgXcQ" },
+          { id: "g5", title: "Szybka akcja z nożem", ytId: "dQw4w9WgXcQ" },
+        ]
+      },
+      {
+        id: 2,
+        name: "🤪 Największa Odklejka / Fail",
+        clips: [
+          { id: "f1", title: "Kiedy zapomnisz wyciszyć mikrofonu", ytId: "dQw4w9WgXcQ" },
+          { id: "f2", title: "Skok do wody, którego nie było", ytId: "dQw4w9WgXcQ" },
+          { id: "f3", title: "Krzyki o 3 rano", ytId: "dQw4w9WgXcQ" },
+          { id: "f4", title: "Przegrana walka z grawitacją", ytId: "dQw4w9WgXcQ" },
+          { id: "f5", title: "Zły flash pod nogi", ytId: "dQw4w9WgXcQ" },
+        ]
+      }
+    ];
+
+    function App() {
+      const [page, setPage] = React.useState('home');
+      const [currentCategoryIndex, setCurrentCategoryIndex] = React.useState(0);
+      const [votes, setVotes] = React.useState({});
+
+      const currentCategory = CATEGORIES[currentCategoryIndex];
+
+      const handleSelectClip = (clipId) => {
+        setVotes({ ...votes, [currentCategory.id]: clipId });
+      };
+
+      const nextCategory = () => {
+        if (currentCategoryIndex < CATEGORIES.length - 1) {
+          setCurrentCategoryIndex(currentCategoryIndex + 1);
+        }
+      };
+
+      const prevCategory = () => {
+        if (currentCategoryIndex > 0) {
+          setCurrentCategoryIndex(currentCategoryIndex - 1);
+        }
+      };
+
+      const styles = {
+        bg: {
+          backgroundColor: '#1e1b4b',
+          backgroundImage: 'linear-gradient(to right, #312e81 1px, transparent 1px), linear-gradient(to bottom, #312e81 1px, transparent 1px)',
+          backgroundSize: '4rem 4rem',
+          minHeight: '100vh',
+          color: '#ffffff',
+          fontFamily: 'sans-serif',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '20px',
+          boxSizing: 'border-box'
+        },
+        goldTitle: {
+          fontSize: '4.5rem',
+          fontWeight: '900',
+          textTransform: 'uppercase',
+          background: 'linear-gradient(to bottom, #fde047, #eab308, #ca8a04)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          marginBottom: '10px',
+          textAlign: 'center',
+          letterSpacing: '-0.05em'
+        },
+        btn: {
+          marginTop: '30px',
+          padding: '15px 40px',
+          background: 'linear-gradient(to right, #f59e0b, #eab308)',
+          color: '#0f172a',
+          border: '2px solid #facc15',
+          borderRadius: '12px',
+          fontSize: '1.25rem',
+          fontWeight: '900',
+          cursor: 'pointer',
+          textTransform: 'uppercase',
+          boxShadow: '0 0 20px rgba(245, 158, 11, 0.4)'
+        },
+        votingContainer: {
+          width: '100%',
+          maxWidth: '1100px',
+          margin: '0 auto',
+          display: 'flex',
+          flexDirection: 'column'
+        },
+        grid: {
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '20px',
+          width: '100%',
+          marginTop: '20px'
+        },
+        card: {
+          background: 'rgba(30, 27, 75, 0.8)',
+          border: '1px solid #312e81',
+          borderRadius: '16px',
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column'
+        },
+        cardSelected: {
+          background: 'rgba(30, 27, 75, 0.9)',
+          border: '2px solid #facc15',
+          borderRadius: '16px',
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
+          boxShadow: '0 0 15px rgba(234, 179, 8, 0.2)'
+        },
+        videoWrapper: {
+          position: 'relative',
+          paddingBottom: '56.25%',
+          height: 0,
+          backgroundColor: '#000'
+        },
+        iframe: {
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          border: 0
+        },
+        voteBtn: {
+          width: '100%',
+          padding: '12px',
+          background: '#312e81',
+          color: '#c7d2fe',
+          border: 'none',
+          fontWeight: 'bold',
+          cursor: 'pointer',
+          textTransform: 'uppercase'
+        },
+        voteBtnActive: {
+          width: '100%',
+          padding: '12px',
+          background: '#eab308',
+          color: '#0f172a',
+          border: 'none',
+          fontWeight: '900',
+          cursor: 'pointer',
+          textTransform: 'uppercase'
+        },
+        headerFlex: {
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          borderBottom: '1px solid #312e81',
+          paddingBottom: '15px',
+          width: '100%'
+        },
+        footerFlex: {
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center', 
+          marginTop: '40px', 
+          borderTop: '1px solid #312e81', 
+          paddingTop: '20px'
+        }
+      };
+
+      return (
+        <div style={styles.bg}>
+          {page === 'home' && (
+            <div style={{ textAlign: 'center' }}>
+              <h1 style={styles.goldTitle}>Złote Franciszki</h1>
+              <p style={{ color: '#c7d2fe', fontSize: '1.2rem' }}>Plebiscyt na najlepsze momenty naszej ekipy z DC!</p>
+              <button style={styles.btn} onClick={() => setPage('voting')}>
+                Przejdź do głosowania
+              </button>
+            </div>
+          )}
+
+          {page === 'voting' && (
+            <div style={styles.votingContainer}>
+              <div style={styles.headerFlex}>
+                <div style={{ flexGrow: 1 }}>
+                  <span style={{ color: '#facc15', fontSize: '0.8rem', fontWeight: 'bold' }}>KATEGORIA {currentCategoryIndex + 1} Z {CATEGORIES.length}</span>
+                  <h2 style={{ fontSize: '2rem', margin: '5px 0 0 0', fontWeight: '900' }}>{currentCategory.name}</h2>
+                </div>
+                <button onClick={() => { setPage('home'); setCurrentCategoryIndex(0); }} style={{ background: 'none', border: 'none', color: '#818cf8', cursor: 'pointer', fontWeight: 'bold', fontSize: '1rem' }}>
+                  ⬅ Menu główne
+                </button>
+              </div>
+
+              <div style={styles.grid}>
+                {currentCategory.clips.map((clip) => {
+                  const isSelected = votes[currentCategory.id] === clip.id;
+                  return (
+                    <div key={clip.id} style={isSelected ? styles.cardSelected : styles.card}>
+                      <div style={{ padding: '15px', fontWeight: 'bold', borderBottom: '1px solid #312e81' }}>{clip.title}</div>
+                      <div style={styles.videoWrapper}>
+                        <iframe style={styles.iframe} src={`https://www.youtube.com/embed/${clip.ytId}`} title={clip.title} allowFullScreen></iframe>
+                      </div>
+                      <button onClick={() => handleSelectClip(clip.id)} style={isSelected ? styles.voteBtnActive : styles.voteBtn}>
+                        {isSelected ? '⭐ Wybrany' : 'Wybierz ten klip'}
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div style={styles.footerFlex}>
+                <button 
+                  onClick={prevCategory} 
+                  disabled={currentCategoryIndex === 0}
+                  style={{ padding: '10px 20px', background: currentCategoryIndex === 0 ? '#1e1b4b' : '#312e81', color: currentCategoryIndex === 0 ? '#4338ca' : '#fff', border: '1px solid #4338ca', borderRadius: '8px', cursor: currentCategoryIndex === 0 ? 'not-allowed' : 'pointer', fontWeight: 'bold' }}
+                >
+                  ⬅ Poprzednia
+                </button>
+
+                <div style={{ fontWeight: 'bold', color: votes[currentCategory.id] ? '#34d399' : '#fbbf24' }}>
+                  {votes[currentCategory.id] ? '✓ Głos oddany' : 'Wybierz film, aby przejść dalej'}
+                </div>
+
+                <button 
+                  onClick={nextCategory} 
+                  disabled={currentCategoryIndex === CATEGORIES.length - 1 || !votes[currentCategory.id]}
+                  style={{ padding: '10px 20px', background: (currentCategoryIndex === CATEGORIES.length - 1 || !votes[currentCategory.id]) ? '#1e1b4b' : '#eab308', color: (currentCategoryIndex === CATEGORIES.length - 1 || !votes[currentCategory.id]) ? '#4338ca' : '#0f172a', border: '1px solid #4338ca', borderRadius: '8px', cursor: (currentCategoryIndex === CATEGORIES.length - 1 || !votes[currentCategory.id]) ? 'not-allowed' : 'pointer', fontWeight: 'bold' }}
+                >
+                  Następna ➡
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
