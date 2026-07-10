@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logowanie Autora - Złote Franciszki</title>
+  
+  <!-- Oficjalna biblioteka Supabase z CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <!-- Konfiguracja kluczy Supabase -->
+  <script>
+    // Wklej tutaj te same klucze co w poprzednich plikach HTML
+    window.SUPABASE_URL = "https://rimgbfsptxgmsuqadkys.supabase.co";
+    window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpbWdiZnNwdHhnbXN1cWFka3lzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2OTA5NTEsImV4cCI6MjA5OTI2Njk1MX0.riQ654qpox2luW12lOEmAox6ATmWwwLQWFZ3f-m4smg
+
+";
+  </script>
+
+  <style>
+    /* Prosty, dedykowany styl dla ekranu logowania w klimacie gali */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #0a0a0a;
+      color: #ffffff;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+    .login-card {
+      background-color: #111111;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      text-align: center;
+    }
+    h1 {
+      color: #d4af37;
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    p.subtitle {
+      color: #888888;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+    .form-group {
+      text-align: left;
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      font-size: 0.85rem;
+      color: #cccccc;
+      margin-bottom: 0.5rem;
+    }
+    input {
+      width: 100%;
+      background-color: #222222;
+      border: 1px solid #444444;
+      color: #ffffff;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    input:focus {
+      outline: none;
+      border-color: #d4af37;
+    }
+    .btn-login {
+      width: 100%;
+      background: linear-gradient(135deg, #d4af37 0%, #aa8513 100%);
+      color: #000000;
+      border: none;
+      padding: 0.8rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+    }
+    .error-msg {
+      color: #ff4d4d;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      min-height: 1.2rem;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 1.5rem;
+      color: #666666;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: #d4af37;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-card">
+    <h1>Złote Franciszki</h1>
+    <p class="subtitle">Weryfikacja Autora Strony</p>
+
+    <form id="login-form">
+      <div class="form-group">
+        <label for="admin-email">Adres E-mail</label>
+        <input type="email" id="admin-email" placeholder="twój-email@domena.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="admin-password">Hasło</label>
+        <input type="password" id="admin-password" placeholder="••••••••" required>
+      </div>
+
+      <button type="submit" class="btn-login">Zaloguj się</button>
+      
+      <!-- Miejsce na ewentualny komunikat o błędzie podmieniany przez auth.js -->
+      <div id="error-message" class="error-msg"></div>
+    </form>
+
+    <a href="index.html" class="back-link">&larr; Wróć do głosowania</a>
+  </div>
+
+  <!-- ŁADOWANIE SKRYPTU OBSŁUGI LOGOWANIA -->
+  <script src="js/auth.js"></script>
+</body>
+</html>
