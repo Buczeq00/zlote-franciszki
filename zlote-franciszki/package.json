@@ -1,0 +1,9 @@
+{
+  "name": "zlote-franciszki-api",
+  "version": "1.0.0",
+  "description": "Backend API dla Złotych Franciszków na Vercel",
+  "main": "api/auth.js",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  }
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Złote Franciszki - Wielka Gala Głosowania</title>
+  
+  <!-- Stylistyka czarno-złotej gali -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Oficjalna biblioteka Supabase z CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <!-- Konfiguracja kluczy Supabase -->
+  <script>
+    // Pamiętaj, aby wstawić tutaj te same klucze co w admin.html. 
+    // Na Vercel podepniesz je pod zmienne środowiskowe projektu.
+    window.SUPABASE_URL = "https://rimgbfsptxgmsuqadkys.supabase.co";
+    window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpbWdiZnNwdHhnbXN1cWFka3lzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2OTA5NTEsImV4cCI6MjA5OTI2Njk1MX0.riQ654qpox2luW12lOEmAox6ATmWwwLQWFZ3f-m4smg
+
+";
+  </script>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- NAGŁÓWEK GALI -->
+    <header class="gala-header">
+      <h1 class="gala-title">Złote Franciszki</h1>
+      <p class="gala-subtitle">Oficjalne Głosowanie Festiwalowe</p>
+    </header>
+
+    <!-- KONTENER NA SEKCJE I FILMY -->
+    <!-- Skrypt app.js automatycznie wygeneruje tutaj 15 sekcji (kategorii) -->
+    <main id="gala-container">
+      <div style="text-align: center; color: #d4af37; padding: 3rem;">
+        <p>Otwieranie kopert z nominacjami...</p>
+      </div>
+    </main>
+
+    <!-- STOPKA GALI -->
+    <footer style="text-align: center; margin-top: 5rem; color: #555; font-size: 0.8rem; letter-spacing: 1px;">
+      <p>&copy; 2026 Złote Franciszki. Wszelkie prawa zastrzeżone. Panel tylko dla Autora.</p>
+    </footer>
+
+  </div>
+
+  <!-- ŁADOWANIE LISTY 15 KATEGORII ORAZ LOGIKI GŁOSOWANIA -->
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

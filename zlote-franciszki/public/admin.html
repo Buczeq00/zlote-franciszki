@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Autora - Złote Franciszki</title>
+  
+  <link rel="stylesheet" href="css/admin.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <script>
+    // Te zmienne są wymagane przez skrypty auth.js, app.js i admin.js
+    // Podczas pracy lokalnej możesz tu wkleić swoje klucze z Supabase (anon public), 
+    // a na Vercel zostaną one skonfigurowane w panelu.
+    window.SUPABASE_URL = "https://rimgbfsptxgmsuqadkys.supabase.co";
+    window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpbWdiZnNwdHhnbXN1cWFka3lzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2OTA5NTEsImV4cCI6MjA5OTI2Njk1MX0.riQ654qpox2luW12lOEmAox6ATmWwwLQWFZ3f-m4smg
+
+";
+  </script>
+</head>
+<body>
+
+  <div class="admin-container">
+    
+    <header>
+      <div>
+        <h1>Złote Franciszki <span>Panel Administracyjny</span></h1>
+      </div>
+      <button id="logout-btn" class="btn-logout">Wyloguj się</button>
+    </header>
+
+    <div class="admin-grid">
+      
+      <div class="admin-card">
+        <h2>🎬 Dodaj nową nominację</h2>
+        <form id="add-movie-form">
+          
+          <div class="form-group">
+            <label for="movie-title">Tytuł filmu / Nazwa nominacji</label>
+            <input type="text" id="movie-title" placeholder="np. Diuna: Część Druga" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="movie-category">Wybierz kategorię (Z 15 dostępnych)</label>
+            <select id="movie-category" required>
+              </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="movie-url">Link do filmu na YouTube</label>
+            <input type="url" id="movie-url" placeholder="https://www.youtube.com/watch?v=..." required>
+          </div>
+          
+          <button type="submit" class="btn-submit">Zatwierdź i dodaj</button>
+        </form>
+      </div>
+
+      <div class="admin-card">
+        <h2>📊 Wyniki głosowania (Na żywo)</h2>
+        <div class="results-scroll" id="results-container">
+          <p class="no-data">Ładowanie statystyk bazy danych...</p>
+        </div>
+      </div>
+
+    </div> <div class="table-wrapper" style="margin-top: 3rem;">
+      <div class="admin-card">
+        <h2>🛠️ Wszystkie nominowane filmy w bazie</h2>
+        <table class="movies-table">
+          <thead>
+            <tr>
+              <th>Tytuł</th>
+              <th>Kategoria</th>
+              <th>Wideo</th>
+              <th>Akcja</th>
+            </tr>
+          </thead>
+          <tbody id="movies-table-body">
+            <tr>
+              <td colspan="4" class="text-center" style="color: #666;">Pobieranie filmów...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div> <script src="js/config.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
